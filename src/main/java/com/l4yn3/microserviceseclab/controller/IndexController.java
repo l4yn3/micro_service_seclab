@@ -2,6 +2,7 @@ package com.l4yn3.microserviceseclab.controller;
 
 import com.l4yn3.microserviceseclab.data.Student;
 import com.l4yn3.microserviceseclab.logic.IndexLogic;
+import com.l4yn3.microserviceseclab.mapper.IStudentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +15,9 @@ public class IndexController {
 
     @Autowired
     IndexLogic indexLogic;
+
+    @Autowired
+    IStudentMapper iStudentMapper;
 
     @RequestMapping(value = "/one")
     public List<Student> one(@RequestParam(value = "username") String username) {
@@ -39,5 +43,10 @@ public class IndexController {
     @RequestMapping(value = "/optinal_like")
     public List<Student> optionalLike(@RequestParam(value = "username") Optional<String> optinal_username) {
         return indexLogic.getStudentWithOptional(optinal_username);
+    }
+
+    @RequestMapping(value = "/myBatis")
+    public List<Student> myBatis(@RequestParam(value = "name") String name) {
+        return iStudentMapper.queryAll(name);
     }
 }
