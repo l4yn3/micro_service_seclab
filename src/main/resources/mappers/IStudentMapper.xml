@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.l4yn3.microserviceseclab.mapper.IStudentMapper">
+    <select id="queryAll" resultType="com.l4yn3.microserviceseclab.data.Student">
+        select * from students where username ='${name}'
+    </select>
+</mapper>
