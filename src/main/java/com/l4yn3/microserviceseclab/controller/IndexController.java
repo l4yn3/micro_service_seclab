@@ -31,6 +31,7 @@ public class IndexController {
         return indexLogic.getStudentWithIn(user_list);
     }
 
+    // 这并不是一个注入，如果SAST扫描器将这个报为SQL注入漏洞，那么这是一个误报问题
     @PostMapping(value = "/longin")
     public List<Student> longin(@RequestBody List<Long> user_list) {
         return indexLogic.getStudentWithInLong(user_list);
@@ -39,6 +40,12 @@ public class IndexController {
     @PostMapping(value = "/object")
     public List<Student> objectParam(@RequestBody Student user) {
         return indexLogic.getStudent(user.getUsername());
+    }
+
+    // 这里并不存在注入，只是用来测试看SAST扫描器是否将这个误报为SQL注入漏洞
+    @PostMapping(value = "/objectint")
+    public List<Student> objectIntParam(@RequestBody Student user) {
+        return indexLogic.getStudentById(user.getId());
     }
 
     @RequestMapping(value = "/optinal_like")

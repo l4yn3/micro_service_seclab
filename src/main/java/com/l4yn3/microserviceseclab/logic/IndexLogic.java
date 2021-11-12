@@ -18,6 +18,10 @@ public class IndexLogic {
         return indexDb.getStudent(username);
     }
 
+    public List<Student> getStudentById(Integer id) {
+        return indexDb.getStudentById(id);
+    }
+
     public List<Student> getStudentWithOptional(Optional<String> username) {
         return indexDb.getStudentWithOptional(username);
     }
