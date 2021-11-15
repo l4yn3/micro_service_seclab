@@ -1,6 +1,7 @@
 package com.l4yn3.microserviceseclab.db;
 
 import com.l4yn3.microserviceseclab.data.Student;
+import com.l4yn3.microserviceseclab.data.Teacher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -27,6 +28,14 @@ public class IndexDb {
         return student;
     };
 
+    private static final RowMapper<Teacher> ROW_MAPPER_TEACHER = (rs, i) -> {
+        Teacher teacher = new Teacher();
+        teacher.setId(rs.getInt("id"));
+        teacher.setSex(rs.getBoolean("sex"));
+        teacher.setName(rs.getString("username"));
+        return teacher;
+    };
+
     public List<Student> getStudent(String username) {
         //String sql = "select * from students where username like '%" + username.get() + "%'";
         String sql = "select * from students where username like '%" + username + "%'";
@@ -43,6 +52,11 @@ public class IndexDb {
     public List<Student> getStudentById(Integer id) {
         String sqlWithInt = "select * from students where id = '" + String.valueOf(id) + "'";
         return jdbcTemplate.query(sqlWithInt, ROW_MAPPER);
+    }
+
+    public List<Teacher> getTeacherById(String userName) {
+        String sqlWithInt = "select * from teachers where id = '" + userName + "'";
+        return jdbcTemplate.query(sqlWithInt, ROW_MAPPER_TEACHER);
     }
 
     public List<Student> getStudentWithIn(List<String> name_list) {

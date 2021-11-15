@@ -1,6 +1,7 @@
 package com.l4yn3.microserviceseclab.controller;
 
 import com.l4yn3.microserviceseclab.data.Student;
+import com.l4yn3.microserviceseclab.data.Teacher;
 import com.l4yn3.microserviceseclab.logic.IndexLogic;
 import com.l4yn3.microserviceseclab.mapper.IStudentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,12 @@ public class IndexController {
     @PostMapping(value = "/objectint")
     public List<Student> objectIntParam(@RequestBody Student user) {
         return indexLogic.getStudentById(user.getId());
+    }
+
+    // 测试Lombok插件是否会影响漏洞的判断
+    @PostMapping(value = "/object_lombok")
+    public List<Teacher> objectLomBok(@RequestBody Teacher user) {
+        return indexLogic.getTeacherById(user.getName());
     }
 
     @RequestMapping(value = "/optinal_like")
