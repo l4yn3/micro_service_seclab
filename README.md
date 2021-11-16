@@ -25,6 +25,9 @@ Object Source | 对象类型 | ` objectParam(@RequestBody Student user) `
 MyBatis注入 | XML分离SQL检测 | `myBatis(@RequestParam(value = "name") String name)`
 In类型注入 | In类型注入 | 参照代码
 Like类型 | Like类型注入 | 参照代码
+Lombok | Lombok对注入漏洞的影响 | 参照代码
+MyBatis注解方式注入 | MyBatis注解方式注入 | 参照代码
+Spring Data JPA | JPA 方式 | 参照代码
 
 #### 2). RCE命令执行
 
@@ -52,10 +55,15 @@ public class FastJsonController {
 #### 4. SSRF漏洞
 种类 | 解释 | 伪代码
 ---|---|---
-new URL(args)| new URL(args)类型的SSRF| --
-
+url.openConnection()| url.openConnection()引起的SSRF| 参照代码
+Request.Get() | Request.Get()引起的SSRF | 参照代码
+OkHttpClient | OkHttpClient引起的SSRF | 参照代码
+DefaultHttpClient| DefaultHttpClient引起的SSRF |参照代码
+url.openStream()| url.openStream()引起的SSRF | 参照代码
 #### 5. XXE
-添加中
+种类 | 解释 | 伪代码
+---|---|---
+DocumentBuilderFactory| DocumentBuilderFactory引起的SSRF | 参照代码
 
 #### 6. 反序列化漏洞
 持续添加中
