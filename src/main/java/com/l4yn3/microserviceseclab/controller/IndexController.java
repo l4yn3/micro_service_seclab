@@ -1,5 +1,7 @@
 package com.l4yn3.microserviceseclab.controller;
 
+import com.l4yn3.microserviceseclab.dao.PersonRepository;
+import com.l4yn3.microserviceseclab.data.Person;
 import com.l4yn3.microserviceseclab.data.Student;
 import com.l4yn3.microserviceseclab.data.Teacher;
 import com.l4yn3.microserviceseclab.logic.IndexLogic;
@@ -20,6 +22,9 @@ public class IndexController {
 
     @Autowired
     IStudentMapper iStudentMapper;
+
+    @Autowired
+    PersonRepository personRepository;
 
     @RequestMapping(value = "/one")
     public List<Student> one(@RequestParam(value = "username") String username) {
@@ -63,5 +68,21 @@ public class IndexController {
     @RequestMapping(value = "/myBatis")
     public List<Student> myBatis(@RequestParam(value = "name") String name) {
         return iStudentMapper.queryAll(name);
+    }
+
+    @RequestMapping(value = "/myBatisWithAnnotations")
+    public List<Student> myBatisWithAnnotations(@RequestParam(value = "name") String name) {
+        return iStudentMapper.queryAllByAnnotations(name);
+    }
+
+    // 一般性jpa查询，不存在注入问题
+    @RequestMapping(value = "/jpaone")
+    public List<Person> jpaOne(@RequestParam(value = "name") String name) {
+        return personRepository.findPersonByUsername(name);
+    }
+
+    @RequestMapping(value = "/jpaWithAnnotations")
+    public List<Person> jpawithAnnotations(@RequestParam(value = "name") String name) {
+        return personRepository.findPersonByNickname(name);
     }
 }
