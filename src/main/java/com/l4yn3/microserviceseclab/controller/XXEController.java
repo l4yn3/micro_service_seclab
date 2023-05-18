@@ -9,7 +9,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
-@RestController(value = "/xxe")
+@RestController
+@RequestMapping(value = "/xxe")
 public class XXEController {
 
     @RequestMapping(value = "/one")
